@@ -15,8 +15,15 @@ var lastClipboardText = '';
 // check and push clipboard text to other peers
 function checkAndPushText() {
   //console.log('checkAndPushText');
-  var clipboardText = clipboard.paste();
-  if (clipboardText == lastClipboardText
+    var clipboardText = null
+
+    try {
+        clipboardText = clipboard.paste();
+    } catch (ex) {
+        console.log('Failed to run paste()')
+    }
+
+  if (!clipboardText ||  clipboardText == lastClipboardText
    || clipboardText.length == 0
    || peers.length == 0)
   {
@@ -85,7 +92,11 @@ function writeToClipboard(data)
   // we simply skip the 8 bytes header
   var text = data.toString('utf8', 8);
   //console.log(text);
-  clipboard.copy(text);
+  try {
+      clipboard.copy(text);
+  } catch (ex) {
+      console.log('failed to set clipboard')
+  }
 }
 
 var server = net.createServer(function (socket) {
@@ -96,12 +107,12 @@ var server = net.createServer(function (socket) {
   socket.on('data', function (chunk) {
     for(var i=0; i<peers.length; i++)
     {
-    	var client = peers[i];
-    	if (client != socket)
-    	{
-    		//console.log('write to client');
-    		client.write(chunk);
-    	}
+        var client = peers[i];
+        if (client != socket)
+        {
+            //console.log('write to client');
+            client.write(chunk);
+        }
       else
       {
         writeToClipboard(chunk);
@@ -111,12 +122,12 @@ var server = net.createServer(function (socket) {
 
   // remove client from the list
   socket.on('end', function() {
-  	var index = peers.indexOf(socket);
-  	if (index > -1)
-  	{
-  		//console.log('remove client');
-  		peers.splice(index, 1);
-  	}
+    var index = peers.indexOf(socket);
+    if (index > -1)
+    {
+        //console.log('remove client');
+        peers.splice(index, 1);
+    }
     //console.log('client disconnected');
   });
 
