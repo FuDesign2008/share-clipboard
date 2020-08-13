@@ -7,6 +7,7 @@
 import createServer from './lib/Server'
 import createClient from './lib/Client'
 
+const defaultHost = '0.0.0.0'
 const defaultPort = 8989
 
 if (process.argv.length == 3) {
@@ -15,5 +16,5 @@ if (process.argv.length == 3) {
   createClient(host, defaultPort)
 } else {
   // node ./share-clipboard.js
-  createServer('localhost', defaultPort)
+  createServer(defaultHost, defaultPort)
 }

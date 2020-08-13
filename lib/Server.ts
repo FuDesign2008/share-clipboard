@@ -8,13 +8,30 @@ import * as http from 'http'
 import * as socketIo from 'socket.io'
 import Clipboard, { ClipboardEvent } from './clipboard'
 import { SocketEvent } from './socket'
+import * as os from 'os'
+const ifaces = os.networkInterfaces()
 
 function createSocket(
   host: string,
   port: number,
   handleClientSocket: (socket: socketIo.Socket) => void,
 ) {
-  console.log(`Starting server ${host}:${port}`)
+  console.log(`Starting server: `)
+  if (host !== '0.0.0.0') {
+    console.info(`${host}:${port}`)
+  } else {
+    Object.keys(ifaces).forEach(function (dev) {
+      const arr = ifaces && ifaces[dev] ? ifaces[dev] : []
+      if (arr) {
+        arr.forEach(function (details) {
+          if (details.family === 'IPv4') {
+            console.info(`${details.address}:${port}`)
+          }
+        })
+      }
+    })
+  }
+
   const server = http.createServer()
   const io = socketIo.listen(server)
   io.on('connection', (client) => {
