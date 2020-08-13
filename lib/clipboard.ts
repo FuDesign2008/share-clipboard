@@ -32,9 +32,13 @@ class Clipboard extends events.EventEmitter {
   }
 
   private monitorSystemClipboard() {
-    copyPaste.paste((e, text) => {
+    copyPaste.paste((e, data) => {
       if (e) {
         console.error(e)
+      }
+      const text = data && data.toString ? data.toString() : ''
+      if (!text) {
+        return
       }
       if (text === this._lastValue) {
         return

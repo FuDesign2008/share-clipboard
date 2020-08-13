@@ -70,9 +70,13 @@ var Clipboard = /** @class */ (function (_super) {
     });
     Clipboard.prototype.monitorSystemClipboard = function () {
         var _this = this;
-        copyPaste.paste(function (e, text) {
+        copyPaste.paste(function (e, data) {
             if (e) {
                 console.error(e);
+            }
+            var text = data && data.toString ? data.toString() : '';
+            if (!text) {
+                return;
             }
             if (text === _this._lastValue) {
                 return;
