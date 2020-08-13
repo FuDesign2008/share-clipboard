@@ -60,12 +60,12 @@ function createSocket(host, port, handleClientSocket) {
     server.listen(port, host);
 }
 function createServer(host, port) {
-    if (host === void 0) { host = 'localhost'; }
+    if (host === void 0) { host = '0.0.0.0'; }
     if (port === void 0) { port = 8989; }
     var clipboard = new clipboard_1.default();
     createSocket(host, port, function (client) {
         client.on(socket_1.SocketEvent.paste, function (text) {
-            console.info("Received clipboard: " + text);
+            console.info("Received clipboard from client: " + text);
             clipboard.set(text);
         });
         clipboard.on(clipboard_1.ClipboardEvent.change, function (text) {

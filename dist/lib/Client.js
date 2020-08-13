@@ -44,7 +44,7 @@ function createClient(host, port) {
     var clipboard = new clipboard_1.default();
     var socket = createSocket(url);
     socket.on(socket_1.SocketEvent.paste, function (text) {
-        console.info("Received clipboard: " + text);
+        console.info("Received clipboard from server: " + text);
         clipboard.set(text);
     });
     clipboard.on(clipboard_1.ClipboardEvent.change, function (text) {

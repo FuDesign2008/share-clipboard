@@ -45,12 +45,12 @@ function createSocket(
   server.listen(port, host)
 }
 
-function createServer(host = 'localhost', port = 8989): void {
+function createServer(host = '0.0.0.0', port = 8989): void {
   const clipboard = new Clipboard()
 
   createSocket(host, port, (client: socketIo.Socket) => {
     client.on(SocketEvent.paste, (text: string) => {
-      console.info(`Received clipboard: ${text}`)
+      console.info(`Received clipboard from client: ${text}`)
       clipboard.set(text)
     })
     clipboard.on(ClipboardEvent.change, (text) =>
