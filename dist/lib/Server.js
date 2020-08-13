@@ -34,6 +34,7 @@ function createSocket(host, port, handleClientSocket) {
     var io = socketIo.listen(server);
     io.on('connection', function (client) {
         var remoteAddress = client.conn.remoteAddress;
+        console.log("Client " + remoteAddress + " is connected");
         client.on('disconnect', function () {
             console.log("Client " + remoteAddress + " is disconnected");
         });
