@@ -4,8 +4,8 @@
  * @date  2020-08-13
  */
 
-import createServer from './src/Server'
-import createClient from './src/Client'
+import createServer from './lib/Server'
+import createClient from './lib/Client'
 
 const defaultPort = 8989
 
