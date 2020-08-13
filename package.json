@@ -25,7 +25,9 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "server": "node ./dist/share-clipboard.js",
+    "client": "node ./dist/share-clipboard.js 10.236.104.67",
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
