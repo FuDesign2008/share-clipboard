@@ -19,6 +19,7 @@ function createSocket(
   const io = socketIo.listen(server)
   io.on('connection', (client) => {
     const remoteAddress = client.conn.remoteAddress
+    console.log(`Client ${remoteAddress} is connected`)
     client.on('disconnect', () => {
       console.log(`Client ${remoteAddress} is disconnected`)
     })
