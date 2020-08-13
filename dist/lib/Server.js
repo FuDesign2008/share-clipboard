@@ -28,8 +28,25 @@ var http = __importStar(require("http"));
 var socketIo = __importStar(require("socket.io"));
 var clipboard_1 = __importStar(require("./clipboard"));
 var socket_1 = require("./socket");
+var os = __importStar(require("os"));
+var ifaces = os.networkInterfaces();
 function createSocket(host, port, handleClientSocket) {
-    console.log("Starting server " + host + ":" + port);
+    console.log("Starting server: ");
+    if (host !== '0.0.0.0') {
+        console.info(host + ":" + port);
+    }
+    else {
+        Object.keys(ifaces).forEach(function (dev) {
+            var arr = ifaces && ifaces[dev] ? ifaces[dev] : [];
+            if (arr) {
+                arr.forEach(function (details) {
+                    if (details.family === 'IPv4') {
+                        console.info(details.address + ":" + port);
+                    }
+                });
+            }
+        });
+    }
     var server = http.createServer();
     var io = socketIo.listen(server);
     io.on('connection', function (client) {
