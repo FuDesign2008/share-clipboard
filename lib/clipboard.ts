@@ -16,6 +16,7 @@ class Clipboard extends events.EventEmitter {
     super()
     this._lastValue = null
     setInterval(() => this.monitorSystemClipboard(), refreshInterval)
+    this.set('share-client start')
   }
 
   set(text: string): boolean {
@@ -34,7 +35,8 @@ class Clipboard extends events.EventEmitter {
   private monitorSystemClipboard() {
     copyPaste.paste((e, data) => {
       if (e) {
-        console.error(e)
+        // console.error(e)
+        return
       }
       const text = data && data.toString ? data.toString() : ''
       if (!text) {
