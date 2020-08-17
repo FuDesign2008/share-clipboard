@@ -16,7 +16,7 @@ class Clipboard extends events.EventEmitter {
     super()
     this._lastValue = null
     setInterval(() => this.monitorSystemClipboard(), refreshInterval)
-    this.set('share-client start')
+    this.set('share-clipboard start')
   }
 
   set(text: string): boolean {
