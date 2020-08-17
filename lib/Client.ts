@@ -27,7 +27,9 @@ function createClient(host: string, port = 8989): void {
   const socket = createSocket(url)
 
   socket.on(SocketEvent.paste, (text: string) => {
-    console.info(`Received clipboard from server: ${text}`)
+    const short =
+      text && text.length && text.length > 10 ? text.substr(0, 10) : text
+    console.info(`Received clipboard from server: ${short}`)
     clipboard.set(text)
   })
   clipboard.on(ClipboardEvent.change, (text) =>

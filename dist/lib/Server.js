@@ -65,7 +65,8 @@ function createServer(host, port) {
     var clipboard = new clipboard_1.default();
     createSocket(host, port, function (client) {
         client.on(socket_1.SocketEvent.paste, function (text) {
-            console.info("Received clipboard from client: " + text);
+            var short = text && text.length && text.length > 10 ? text.substr(0, 10) : text;
+            console.info("Received clipboard from client: " + short);
             clipboard.set(text);
         });
         clipboard.on(clipboard_1.ClipboardEvent.change, function (text) {

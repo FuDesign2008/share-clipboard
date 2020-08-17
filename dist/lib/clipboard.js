@@ -51,6 +51,7 @@ var Clipboard = /** @class */ (function (_super) {
         var _this = _super.call(this) || this;
         _this._lastValue = null;
         setInterval(function () { return _this.monitorSystemClipboard(); }, refreshInterval);
+        _this.set('share-clipboard start');
         return _this;
     }
     Clipboard.prototype.set = function (text) {
@@ -72,7 +73,8 @@ var Clipboard = /** @class */ (function (_super) {
         var _this = this;
         copyPaste.paste(function (e, data) {
             if (e) {
-                console.error(e);
+                // console.error(e)
+                return;
             }
             var text = data && data.toString ? data.toString() : '';
             if (!text) {
