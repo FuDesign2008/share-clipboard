@@ -9,6 +9,8 @@ import * as socketIo from 'socket.io'
 import Clipboard, { ClipboardEvent } from './clipboard'
 import { SocketEvent } from './socket'
 import * as os from 'os'
+import { shortText } from './utils'
+
 const ifaces = os.networkInterfaces()
 
 function createSocket(
@@ -50,8 +52,7 @@ function createServer(host = '0.0.0.0', port = 8989): void {
 
   createSocket(host, port, (client: socketIo.Socket) => {
     client.on(SocketEvent.paste, (text: string) => {
-      const short =
-        text && text.length && text.length > 10 ? text.substr(0, 10) : text
+      const short = shortText(text)
       console.info(`Received clipboard from client: ${short}`)
       clipboard.set(text)
     })
