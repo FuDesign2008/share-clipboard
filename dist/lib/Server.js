@@ -29,6 +29,7 @@ var socketIo = __importStar(require("socket.io"));
 var clipboard_1 = __importStar(require("./clipboard"));
 var socket_1 = require("./socket");
 var os = __importStar(require("os"));
+var utils_1 = require("./utils");
 var ifaces = os.networkInterfaces();
 function createSocket(host, port, handleClientSocket) {
     console.log("Starting server: ");
@@ -65,7 +66,7 @@ function createServer(host, port) {
     var clipboard = new clipboard_1.default();
     createSocket(host, port, function (client) {
         client.on(socket_1.SocketEvent.paste, function (text) {
-            var short = text && text.length && text.length > 10 ? text.substr(0, 10) : text;
+            var short = utils_1.shortText(text);
             console.info("Received clipboard from client: " + short);
             clipboard.set(text);
         });

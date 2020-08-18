@@ -28,6 +28,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var socketIo = __importStar(require("socket.io-client"));
 var clipboard_1 = __importStar(require("./clipboard"));
 var socket_1 = require("./socket");
+var utils_1 = require("./utils");
 function createSocket(url) {
     var socket = socketIo.connect(url);
     socket.on('connect', function () {
@@ -44,7 +45,7 @@ function createClient(host, port) {
     var clipboard = new clipboard_1.default();
     var socket = createSocket(url);
     socket.on(socket_1.SocketEvent.paste, function (text) {
-        var short = text && text.length && text.length > 10 ? text.substr(0, 10) : text;
+        var short = utils_1.shortText(text);
         console.info("Received clipboard from server: " + short);
         clipboard.set(text);
     });
