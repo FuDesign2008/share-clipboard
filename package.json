@@ -26,8 +26,8 @@
     "typescript": "^3.9.7"
   },
   "scripts": {
-    "server": "node ./dist/share-clipboard.js",
-    "client": "node ./dist/share-clipboard.js 10.236.104.67",
+    "server": "npm run build && node ./dist/share-clipboard-server.js",
+    "client": "npm run build && node ./dist/share-clipboard-client.js",
     "build": "tsc -p ."
   },
   "repository": {
