@@ -12,7 +12,7 @@ export enum ClipboardEvent {
 
 class Clipboard extends events.EventEmitter {
   private _lastValue: string | null
-  constructor(refreshInterval = 2000) {
+  constructor(refreshInterval = 3000) {
     super()
     this._lastValue = null
     setInterval(() => this.monitorSystemClipboard(), refreshInterval)
