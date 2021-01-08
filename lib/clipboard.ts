@@ -12,7 +12,9 @@ export enum ClipboardEvent {
 
 class Clipboard extends events.EventEmitter {
   private _lastValue: string | null
-  constructor(refreshInterval = 3000) {
+  // 默认值调了很多次，慎重修改
+  // 1. 3000 太长
+  constructor(refreshInterval = 1500) {
     super()
     this._lastValue = null
     setInterval(() => this.monitorSystemClipboard(), refreshInterval)
