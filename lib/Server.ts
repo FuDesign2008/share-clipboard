@@ -11,56 +11,55 @@ import { SocketEvent } from './socket'
 import * as os from 'os'
 import { shortText } from './utils'
 
-const ifaces = os.networkInterfaces()
+function getHost(): string {
+  const ifaces = os.networkInterfaces()
+  let host = ''
 
-function createSocket(
-  host: string,
-  port: number,
-  handleClientSocket: (socket: socketIo.Socket) => void,
-) {
-  console.log(`Starting server: `)
-  if (host !== '0.0.0.0') {
-    console.info(`${host}:${port}`)
-  } else {
-    Object.keys(ifaces).forEach(function (dev) {
-      const arr = ifaces && ifaces[dev] ? ifaces[dev] : []
-      if (arr) {
-        arr.forEach(function (details) {
-          if (details.family === 'IPv4') {
-            console.info(`${details.address}:${port}`)
-          }
-        })
-      }
-    })
-  }
+  Object.keys(ifaces).forEach(function (dev) {
+    const arr = ifaces && ifaces[dev] ? ifaces[dev] : []
+    if (arr) {
+      arr.some(function (details) {
+        if (details.family === 'IPv4' && !details.internal) {
+          host = details.address
+          return true
+        }
+      })
+    }
+  })
+  return host
+}
+
+function createServer(port: number) {
+  const host = getHost()
+  const clipboard = new Clipboard()
+
+  console.info(`Starting server: ${host}:${port}`)
 
   const server = http.createServer()
   const io = socketIo.listen(server)
-  io.on('connection', (client) => {
-    const remoteAddress = client.conn.remoteAddress
+
+  io.on('connection', (socket) => {
+    const remoteAddress = socket.conn.remoteAddress
     console.log(`Client ${remoteAddress} is connected`)
-    client.on('disconnect', () => {
+
+    socket.on('disconnect', () => {
       console.log(`Client ${remoteAddress} is disconnected`)
     })
-    handleClientSocket(client)
-  })
-  server.listen(port, host)
-}
 
-function createServer(host = '0.0.0.0', port = 8989): void {
-  const clipboard = new Clipboard()
-
-  createSocket(host, port, (client: socketIo.Socket) => {
-    client.on(SocketEvent.paste, (text: string) => {
+    socket.on(SocketEvent.clipboardChange, (text: string) => {
       const short = shortText(text)
       console.info(`Received clipboard from client: ${short}`)
       clipboard.set(text)
     })
+
     clipboard.on(ClipboardEvent.change, (text) =>
-      client.emit(SocketEvent.paste, text),
+      socket.emit(SocketEvent.clipboardChange, text),
     )
-    client.emit(SocketEvent.paste, clipboard.current)
+
+    socket.emit(SocketEvent.clipboardChange, clipboard.current)
   })
+
+  server.listen(port, host)
 }
 
 export default createServer

@@ -5,7 +5,7 @@
  */
 
 enum SocketEvent {
-  paste = 'paste',
+  clipboardChange = 'clipboard-change',
 }
 
 export { SocketEvent }
