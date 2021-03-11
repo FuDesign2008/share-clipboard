@@ -14,8 +14,6 @@
 
 ### Server
 
-1. Install pm2 globally
-   - `npm install -g pm2`
 1. Install
    - `git clone https://github.com/FuDesign2008/share-clipboard.git`
 1. Start the server:
@@ -25,8 +23,6 @@
 
 Start the client on another machine.
 
-1. Install pm2 globally
-   - `npm install -g pm2`
 1. Install
    - `git clone https://github.com/FuDesign2008/share-clipboard.git`
 1. Create `.env` from './.env.example' and edit the `SERVER_HOST`
