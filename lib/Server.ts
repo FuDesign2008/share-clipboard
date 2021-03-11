@@ -29,7 +29,16 @@ function getHost(): string {
   return host
 }
 
-function createServer(port: number) {
+function sendClipboard(socket: socketIo.Socket, text: string | null): void {
+  if (text == null) {
+    return
+  }
+  socket.emit(SocketEvent.clipboardChange, text)
+  const short = shortText(text)
+  console.log(`Send clipboard to clients: ${short}`)
+}
+
+function createServer(port: number): void {
   const host = getHost()
   const clipboard = new Clipboard()
 
@@ -52,11 +61,11 @@ function createServer(port: number) {
       clipboard.set(text)
     })
 
-    clipboard.on(ClipboardEvent.change, (text) =>
-      socket.emit(SocketEvent.clipboardChange, text),
-    )
+    clipboard.on(ClipboardEvent.change, (text) => {
+      sendClipboard(socket, text)
+    })
 
-    socket.emit(SocketEvent.clipboardChange, clipboard.current)
+    sendClipboard(socket, clipboard.current)
   })
 
   server.listen(port, host)

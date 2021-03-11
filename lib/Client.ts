@@ -29,12 +29,15 @@ function createClient(host: string, port = 8989): void {
 
   socket.on(SocketEvent.clipboardChange, (text: string) => {
     const short = shortText(text)
-    console.info(`Received clipboard from server: ${short}`)
+    console.info(`Received clipboard from Server: ${short}`)
     clipboard.set(text)
   })
-  clipboard.on(ClipboardEvent.change, (text) =>
-    socket.emit(SocketEvent.clipboardChange, text),
-  )
+
+  clipboard.on(ClipboardEvent.change, (text) => {
+    socket.emit(SocketEvent.clipboardChange, text)
+    const short = shortText(text)
+    console.info(`Send clipboard to Server: ${short}`)
+  })
 }
 
 export default createClient
