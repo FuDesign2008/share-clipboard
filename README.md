@@ -44,3 +44,8 @@ All dependencies are bundled into this repo, no additional dependencies.
 
 - https://github.com/coralw/share-clipboard
 - https://github.com/harttle/clipbrd-share
+
+## ref
+
+1. 监听文件夹变化 https://www.npmjs.com/package/chokidar
+1. https://www.npmjs.com/package/socket.io-stream
