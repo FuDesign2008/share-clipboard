@@ -1,4 +1,4 @@
-# SShare Clipboard
+# share-clipboard
 
 ## Features
 
@@ -39,6 +39,12 @@ All dependencies are bundled into this repo, no additional dependencies.
 
 1. [xclip](https://www.archlinux.org/packages/extra/x86_64/xclip/)
    - `pacman -S xclip`
+
+## TODO
+
+1. server 开机自动启动
+1. client 开机自动启动，并根据上次的 IP/电脑名，尝试连接 server
+1. 粘贴图片/文件的支持
 
 ## Thanks
 
