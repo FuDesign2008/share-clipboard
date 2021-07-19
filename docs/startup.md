@@ -1,5 +1,7 @@
 # Automatically Run Service on System Startup
 
+> ⚠️ You should read and execute basic usage in [../README.md](../README.md)
+
 ## Mac
 
 ### Server
@@ -17,6 +19,8 @@
 1. reboot system to check
 
 ### Reference
+
+See reference for more details.
 
 1. [How to schedule Node.js Scripts on Your Mac With Launchd | by Matthew Williams | Better Programming](https://betterprogramming.pub/schedule-node-js-scripts-on-your-mac-with-launchd-a7fca82fbf02)
 
@@ -41,7 +45,3 @@
 See reference for more details.
 
 1. [Automatically Start Node.js Server on System Restarts | by Samuel Elh | Medium](https://medium.com/@elhardoum/automatically-start-node-js-server-on-system-restarts-cab3d2194674)
-
-```
-
-```

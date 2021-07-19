@@ -10,7 +10,23 @@
    - ✅text/plain
    - 🏃image/png
 
-## Usage
+## Dependencies
+
+### OSX
+
+All dependencies are bundled into this repo, no additional dependencies.
+
+### Linux
+
+1. xclip
+   - ubuntu
+     - `sudo apt-get install -y xclip`
+     - [How to install xclip ubuntu package on Ubuntu 20.04/Ubuntu 18.04/Ubuntu 19.04/Ubuntu 16.04](https://zoomadmin.com/HowToInstall/UbuntuPackage/xclip)
+   - arch linux
+     - `pacman -S xclip`
+     - [Arch Linux - xclip 0.13-3 (x86_64)](https://archlinux.org/packages/extra/x86_64/xclip/)
+
+## Basic Usage
 
 ### Server
 
@@ -29,16 +45,9 @@ Start the client on another machine.
 1. Start the client:
    - `npm install && npm run client`
 
-## Dependencies
+## Advanced Usage
 
-### OSX
-
-All dependencies are bundled into this repo, no additional dependencies.
-
-### Linux
-
-1. [xclip](https://www.archlinux.org/packages/extra/x86_64/xclip/)
-   - `pacman -S xclip`
+1. [Automatically Run Service on System Startup](./docs/startup.md)
 
 ## TODO
 
