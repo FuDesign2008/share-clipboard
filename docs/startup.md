@@ -8,6 +8,7 @@
 
 1. [bash - Running script upon login mac - Stack Overflow](https://stackoverflow.com/questions/6442364/running-script-upon-login-mac)
 1. [macos - Run command on startup / login (Mac OS X) - Super User](https://superuser.com/questions/229773/run-command-on-startup-login-mac-os-x)
+1. [How to schedule Node.js Scripts on Your Mac With Launchd | by Matthew Williams | Better Programming](https://betterprogramming.pub/schedule-node-js-scripts-on-your-mac-with-launchd-a7fca82fbf02)
 
 ## Linux
 
