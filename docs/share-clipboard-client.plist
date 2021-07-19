@@ -28,7 +28,7 @@
         <array>
             <string>/usr/local/bin/npm</string>
             <string>run</string>
-            <string>server</string>
+            <string>client</string>
         </array>
 
     </dict>

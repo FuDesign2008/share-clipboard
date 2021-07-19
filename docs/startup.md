@@ -2,12 +2,22 @@
 
 ## Mac
 
-1. `lanchd`
+### Server
+
+1. run command in terminal: `cp ./docs/share-clipboard-server.plist ~/Library/LaunchAgents/share-clipboard-server.plist`
+1. open `~/Library/LaunchAgents/share-clipboard-server.plist` and modify `/absolute/path/to/share-clipboard` in the file.
+1. run `launchctl load ~/Library/LaunchAgents/share-clipboard-server.plist` and check `./stdout.log`
+1. reboot system to check
+
+### Client
+
+1. run command in terminal: `cp ./docs/share-clipboard-client.plist ~/Library/LaunchAgents/share-clipboard-client.plist`
+1. open `~/Library/LaunchAgents/share-clipboard-client.plist` and modify `/absolute/path/to/share-clipboard` in the file.
+1. run `launchctl load ~/Library/LaunchAgents/share-clipboard-client.plist` and check `./stdout.log`
+1. reboot system to check
 
 ### Reference
 
-1. [bash - Running script upon login mac - Stack Overflow](https://stackoverflow.com/questions/6442364/running-script-upon-login-mac)
-1. [macos - Run command on startup / login (Mac OS X) - Super User](https://superuser.com/questions/229773/run-command-on-startup-login-mac-os-x)
 1. [How to schedule Node.js Scripts on Your Mac With Launchd | by Matthew Williams | Better Programming](https://betterprogramming.pub/schedule-node-js-scripts-on-your-mac-with-launchd-a7fca82fbf02)
 
 ## Linux
@@ -31,3 +41,7 @@
 See reference for more details.
 
 1. [Automatically Start Node.js Server on System Restarts | by Samuel Elh | Medium](https://medium.com/@elhardoum/automatically-start-node-js-server-on-system-restarts-cab3d2194674)
+
+```
+
+```
