@@ -44,6 +44,7 @@ Start the client on another machine.
 1. Create `.env` from './.env.example' and edit the `SERVER_HOST`
 1. Start the client:
    - `npm install && npm run client`
+1. Edit `.env` file if `SERVER_HOST` is changed
 
 ## Advanced Usage
 
@@ -51,9 +52,10 @@ Start the client on another machine.
 
 ## TODO
 
-1. server 开机自动启动
-1. client 开机自动启动，并根据上次的 IP/电脑名，尝试连接 server
+1. ~~server 开机自动启动~~
+1. ~~client 开机自动启动~~
 1. 粘贴图片/文件的支持
+1. client 根据电脑名称自动连接 server
 
 ## Thanks
 

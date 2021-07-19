@@ -22,12 +22,13 @@
     "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
+    "onchange": "^7.1.0",
     "prettier": "^2.0.5",
     "typescript": "^3.9.7"
   },
   "scripts": {
     "server": "npm run build && node ./dist/share-clipboard-server.js",
-    "client": "npm run build && node ./dist/share-clipboard-client.js",
+    "client": "npm run build && ./node_modules/onchange/dist/bin.js -i -k '.env' -- node ./dist/share-clipboard-client.js",
     "build": "tsc -p ."
   },
   "repository": {
