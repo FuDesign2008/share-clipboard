@@ -1,4 +1,4 @@
-# Run service at startup
+# Automatically Run Service on System Startup
 
 ## Mac
 
@@ -11,7 +11,22 @@
 
 ## Linux
 
+### Server
+
+1. run command in terminal: `crontab -e`
+   - enter a new line: `@reboot sh -c '/absolute/path/to/share-clipboard && npm run server'`
+   - then save the file and exit
+1. reboot system to check
+
+### Client
+
+1. run command in terminal: `crontab -e`
+   - enter a new line: `@reboot sh -c '/absolute/path/to/share-clipboard && npm run client'`
+   - then save the file and exit
+1. reboot system to check
+
 ### Reference
 
-1. [linux - How to run a shell script at startup - Stack Overflow](https://stackoverflow.com/questions/12973777/how-to-run-a-shell-script-at-startup)
-1. [How To Add Jobs To cron Under Linux or UNIX - nixCraft](https://www.cyberciti.biz/faq/how-do-i-add-jobs-to-cron-under-linux-or-unix-oses/)
+See reference for more details.
+
+1. [Automatically Start Node.js Server on System Restarts | by Samuel Elh | Medium](https://medium.com/@elhardoum/automatically-start-node-js-server-on-system-restarts-cab3d2194674)
