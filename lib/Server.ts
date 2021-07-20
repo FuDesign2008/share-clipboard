@@ -10,6 +10,7 @@ import Clipboard, { ClipboardEvent } from './clipboard'
 import { SocketEvent } from './socket'
 import * as os from 'os'
 import { shortText } from './utils'
+import console from './log'
 
 function getHost(): string {
   const ifaces = os.networkInterfaces()
@@ -35,29 +36,32 @@ function sendClipboard(socket: socketIo.Socket, text: string | null): void {
   }
   socket.emit(SocketEvent.clipboardChange, text)
   const short = shortText(text)
-  console.log(`Send clipboard to clients: ${short}`)
+  console.log(`Send clipboard to clients`, `${short}`)
 }
 
 function createServer(port: number): void {
   const host = getHost()
   const clipboard = new Clipboard()
 
-  console.info(`Starting server: ${host}:${port}`)
+  console.info(`Starting server`, `${host}:${port}`)
 
   const server = http.createServer()
   const io = socketIo.listen(server)
 
   io.on('connection', (socket) => {
     const remoteAddress = socket.conn.remoteAddress
-    console.log(`Client ${remoteAddress} is connected`)
+    console.log(`Client connected`, `Client ${remoteAddress} is connected`)
 
     socket.on('disconnect', () => {
-      console.log(`Client ${remoteAddress} is disconnected`)
+      console.log(
+        `Client disconnected`,
+        `Client ${remoteAddress} is disconnected`,
+      )
     })
 
     socket.on(SocketEvent.clipboardChange, (text: string) => {
       const short = shortText(text)
-      console.info(`Received clipboard from client: ${short}`)
+      console.info(`Received clipboard from client`, `${short}`)
       clipboard.set(text)
     })
 

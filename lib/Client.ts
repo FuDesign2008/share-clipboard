@@ -8,14 +8,15 @@ import * as socketIo from 'socket.io-client'
 import Clipboard, { ClipboardEvent } from './clipboard'
 import { SocketEvent } from './socket'
 import { shortText } from './utils'
+import console from './log'
 
 function createSocket(url: string) {
   const socket = socketIo.connect(url)
   socket.on('connect', () => {
-    console.log(`Connected to a server ${url}`)
+    console.log(`Connected to a server`, `${url}`)
   })
   socket.on('disconnect', () => {
-    console.log(`Disconnected from a server ${url}`)
+    console.log(`Disconnected from a server`, `${url}`)
   })
 
   return socket
@@ -29,9 +30,10 @@ function createClient(host: string, port = 8989): void {
   const socket = createSocket(url)
 
   let timerId: ReturnType<typeof setTimeout> | null = setTimeout(() => {
-    console.warn('Too long to wait server response')
-    console.info('1. make sure the server has started')
-    console.info('2. make sure the SERVER_HOST in .env file is right')
+    console.warn(
+      'Too long to wait server response',
+      '1. make sure the server has started\n2. make sure the SERVER_HOST in .env file is right',
+    )
   }, waitTime)
 
   socket.on(SocketEvent.clipboardChange, (text: string) => {
@@ -40,17 +42,17 @@ function createClient(host: string, port = 8989): void {
       timerId = null
     }
     const short = shortText(text)
-    console.info(`Received clipboard from Server: ${short}`)
+    console.info(`Received clipboard from Server`, `${short}`)
     clipboard.set(text)
   })
 
   clipboard.on(ClipboardEvent.change, (text) => {
     socket.emit(SocketEvent.clipboardChange, text)
     const short = shortText(text)
-    console.info(`Send clipboard to Server: ${short}`)
+    console.info(`Send clipboard to Server`, short)
   })
 
-  console.info(`\nclient has started, waiting message from server...`)
+  console.info(`Client has started`, `waiting message from server...`)
 }
 
 export default createClient
