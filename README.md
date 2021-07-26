@@ -52,8 +52,11 @@ Start the client on another machine.
 
 ## TODO
 
-1. ~~server 开机自动启动~~
-1. ~~client 开机自动启动~~
+1. server 开机自动启动 ✅
+   - mac 下开机自动启动，发送时中文存在乱码
+1. client 开机自动启动 ✅
+   - linux 下开机自动启动， 本机剪贴板发生变化时，不能将信息发送给 server
+   - 但可以接收 server 的变化
 1. 粘贴图片/文件的支持
 1. client 根据电脑名称自动连接 server
 
