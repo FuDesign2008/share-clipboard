@@ -30,7 +30,7 @@
   },
   "scripts": {
     "server": "npm run build && node ./dist/share-clipboard-server.js",
-    "client": "npm run build && ./node_modules/onchange/dist/bin.js -i -k '.env' -- node ./dist/share-clipboard-client.js",
+    "client": "npm run build && node ./node_modules/onchange/dist/bin.js -i -k '.env' -- node ./dist/share-clipboard-client.js",
     "build": "tsc -p ."
   },
   "repository": {
