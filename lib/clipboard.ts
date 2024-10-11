@@ -52,13 +52,13 @@ class Clipboard extends events.EventEmitter {
       copyPaste.paste((e, data) => {
         if (e) {
           // console.error(e)
-          console.log('Clipboard Error', 'Failed to run copyPaste.paste()')
+          console.log('[Clipboard]', 'Failed to run copyPaste.paste()')
           this.monitorSystemClipboard()
           return
         }
         const text = data && data.toString ? data.toString() : ''
         if (!text) {
-          console.log('Clipboard Error', 'The text from clipboard is nil')
+          console.log('[Clipboard]', 'The text from clipboard is nil')
           this.monitorSystemClipboard()
           return
         }
