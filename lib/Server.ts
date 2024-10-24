@@ -14,7 +14,7 @@ import console from './log'
 
 function getHost(): string {
   const ifaces = os.networkInterfaces()
-  let host = ''
+  let host = '0.0.0.0'
 
   Object.keys(ifaces).forEach(function (dev) {
     const arr = ifaces && ifaces[dev] ? ifaces[dev] : []
